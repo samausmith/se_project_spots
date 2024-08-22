@@ -1,0 +1,22 @@
+.cards {
+  padding: 20px 0 40px;
+}
+
+.cards__list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  justify-content: center;
+  list-style-type: none;
+  grid-template-columns: repeat(auto-fit, 413px);
+  gap: 40px 20px;
+}
+
+@media screen and (max-width: 627px) {
+  .cards {
+    padding-bottom: 20px;
+  }
+  .cards__list {
+    grid-template-columns: repeat(auto-fit, 288px);
+  }
+}
