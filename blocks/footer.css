@@ -1,8 +1,13 @@
 .footer {
-  text-align: center;
-  margin: auto;
-  padding: 60px 0 60px;
+  margin: 0;
+  padding: 0;
   border-top: 1px rgba(33, 33, 33, 0.4) solid;
+}
+
+.footer__copyright {
+  margin: 0;
+  padding: 60px 0;
+  text-align: center;
   font-size: 16px;
   font-weight: 400;
   line-height: 1;

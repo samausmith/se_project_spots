@@ -10,6 +10,7 @@
   height: 190px;
   margin-right: 20px;
   border-radius: 8px;
+  object-fit: cover;
 }
 
 .profile__column {
@@ -63,7 +64,7 @@
   opacity: 100%;
 }
 
-.profile__edit-button__img {
+.profile__edit-button-img {
   padding-right: 8px;
 }
 
@@ -87,7 +88,7 @@
   opacity: 80%;
 }
 
-.profile__new-post-button__img {
+.profile__new-post-button-img {
   height: 12px;
   width: 12px;
   padding-right: 8px;
