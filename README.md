@@ -32,4 +32,4 @@ Spots is a basic interactive social media app that allows the user to do to the 
 
 #### Video
 
-- https://youtu.be/Vl0JXzAPAhQ
+- [Video Link](https://youtu.be/Vl0JXzAPAhQ)
