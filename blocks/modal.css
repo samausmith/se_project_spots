@@ -38,7 +38,14 @@
   background-position: center;
   opacity: 40%;
   border-style: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 }
+
+.modal__button-close:hover {
+  opacity: 100%;
+}
+
 .modal__title {
   margin: 0 0 32px;
   font-size: 32px;
