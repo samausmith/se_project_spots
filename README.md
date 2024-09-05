@@ -16,13 +16,13 @@ Spots is a basic interactive social media app that allows the user to do to the 
 
 - HTML
 - CSS
+- Javascript
 - Reponsive Design
 
 ### Future Ideas
 
 - Forms for a new post
 - User login and logout
-- Edit profile section
 - Friends section
 - Liked media list
 
