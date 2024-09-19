@@ -21,7 +21,6 @@ Spots is a basic interactive social media app that allows the user to do to the 
 
 ### Future Ideas
 
-- Forms for a new post
 - User login and logout
 - Friends section
 - Liked media list
