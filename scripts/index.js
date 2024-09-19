@@ -77,6 +77,15 @@ function closeModal(modal) {
   modal.classList.remove("modal_open");
 }
 
+// Find all close buttons
+const closeButtons = document.querySelectorAll(".modal__button-close");
+
+// Function to close all buttons when clicked
+closeButtons.forEach((closeButton) => {
+  const modal = closeButton.closest(".modal");
+  closeButton.addEventListener("click", () => closeModal(modal));
+});
+
 // Edit profile functions
 function handleProfileEditFormSubmit(evt) {
   evt.preventDefault();
@@ -115,8 +124,7 @@ function getCardElement(data) {
   });
 
   cardDeleteButton.addEventListener("click", () => {
-    const cardToDelete = cardDeleteButton.closest(".card");
-    cardToDelete.remove();
+    cardElement.remove();
   });
 
   cardImageElement.addEventListener("click", () => {
@@ -154,6 +162,7 @@ function handleAddCardFormSubmit(evt) {
   const cardElement = getCardElement(newCard);
   cardsList.prepend(cardElement);
   closeModal(addCardModal);
+  addCardForm.reset();
 }
 
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
