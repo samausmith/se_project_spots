@@ -91,6 +91,7 @@ function handleProfileEditFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = profileNameInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
+  closeModal(profileEditModal);
 }
 profileEditButton.addEventListener("click", () => {
   profileNameInput.value = profileName.textContent;
@@ -150,6 +151,7 @@ function handleAddCardFormSubmit(evt) {
   const cardElement = getCardElement(newCard);
   cardsList.prepend(cardElement);
   addCardForm.reset();
+  closeModal(addCardModal);
 }
 
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
