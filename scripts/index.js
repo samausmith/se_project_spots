@@ -72,10 +72,21 @@ const previewModalCloseButton = previewModalElement.querySelector(
 // General form functions
 function openModal(modal) {
   modal.classList.add("modal_open");
+  document.addEventListener("keydown", escModal);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_open");
+  document.removeEventListener("keydown", escModal);
+}
+
+function escModal(evt) {
+  if (evt.key === "Escape") {
+    const activeModal = document.querySelector(".modal_open");
+    if (activeModal) {
+      closeModal(activeModal);
+    }
+  }
 }
 
 // Find all close buttons
