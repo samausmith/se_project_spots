@@ -28,6 +28,8 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg",
   },
 ];
+// General variable
+const modals = document.querySelectorAll(".modal");
 
 // Profile variables
 const profileEditButton = document.querySelector(".profile__edit-button");
@@ -72,15 +74,15 @@ const previewModalCloseButton = previewModalElement.querySelector(
 // General form functions
 function openModal(modal) {
   modal.classList.add("modal_open");
-  document.addEventListener("keydown", escModal);
+  document.addEventListener("keydown", handleEscape);
 }
 
 function closeModal(modal) {
   modal.classList.remove("modal_open");
-  document.removeEventListener("keydown", escModal);
+  document.removeEventListener("keydown", handleEscape);
 }
 
-function escModal(evt) {
+function handleEscape(evt) {
   if (evt.key === "Escape") {
     const activeModal = document.querySelector(".modal_open");
     if (activeModal) {
@@ -92,10 +94,16 @@ function escModal(evt) {
 // Find all close buttons
 const closeButtons = document.querySelectorAll(".modal__button-close");
 
-// Function to close all buttons when clicked
-closeButtons.forEach((closeButton) => {
-  const modal = closeButton.closest(".modal");
-  closeButton.addEventListener("click", () => closeModal(modal));
+// Handle modal closing after clicking overlay or close button
+modals.forEach((modal) => {
+  modal.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("modal_open")) {
+      closeModal(modal);
+    }
+    if (evt.target.classList.contains("modal__button-close")) {
+      closeModal(modal);
+    }
+  });
 });
 
 // Edit profile functions
