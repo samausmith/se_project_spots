@@ -1,5 +1,6 @@
 import { enableValidation, settings } from "../scripts/validation.js";
 import "./index.css";
+import Api from "../utils/Api.js";
 
 const initialCards = [
   {
@@ -31,6 +32,25 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg",
   },
 ];
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "e9c65f8e-c72f-45da-ac44-96567d659c6e",
+    "Content-Type": "application/json",
+  },
+});
+
+api
+  .getAppInfo()
+  .then(([cards]) => {
+    cards.forEach((card) => {
+      const cardElement = getCardElement(card);
+      cardsList.append(cardElement);
+    });
+  })
+  .catch(console.error);
+
 // General variable
 const modals = document.querySelectorAll(".modal");
 
@@ -161,12 +181,6 @@ function getCardElement(data) {
 
   return cardElement;
 }
-
-// Load initial cards
-initialCards.forEach((card) => {
-  const cardElement = getCardElement(card);
-  cardsList.append(cardElement);
-});
 
 // New/add card functions
 addCardButton.addEventListener("click", () => {
