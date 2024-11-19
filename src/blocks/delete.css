@@ -12,6 +12,7 @@
 
 .modal__button-submit_delete:hover {
   background-color: #ff3333;
+  opacity: 100%;
 }
 
 .modal__button-submit_cancel {
@@ -27,9 +28,10 @@
   color: white;
 }
 
-.modal__button-close_offset {
+.modal__button-close_delete {
   right: -44px;
   top: 0;
+  background-image: url(../images/close-Icon-light.svg);
 }
 
 .modal__title_delete {
@@ -38,7 +40,5 @@
 }
 
 /*Todos
--fix hover background colors to not cover text and change properly in red
--change exit symbol to white
 -double check margins
 */
