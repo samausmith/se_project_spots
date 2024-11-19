@@ -1,4 +1,8 @@
-import { enableValidation, settings } from "../scripts/validation.js";
+import {
+  enableValidation,
+  settings,
+  resetValidation,
+} from "../scripts/validation.js";
 import "./index.css";
 import Api from "../utils/Api.js";
 
@@ -36,7 +40,7 @@ const initialCards = [
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "e9c65f8e-c72f-45da-ac44-96567d659c6e",
+    authorization: "7ce32752-7f51-4ee3-8daa-e08858792089",
     "Content-Type": "application/json",
   },
 });
@@ -90,9 +94,20 @@ const previewModalElement = document.querySelector("#preview-modal");
 const previewModalImage = previewModalElement.querySelector(".modal__image");
 const previewModalCaption =
   previewModalElement.querySelector(".modal__caption");
-const previewModalCloseButton = previewModalElement.querySelector(
-  ".modal__button-close"
-);
+//const previewModalCloseButton = previewModalElement.querySelector(
+//  ".modal__button-close"
+//);
+
+// Avatar form elements
+const avatarModal = document.querySelector("#avatar-modal");
+const avatarButton = document.querySelector(".profile__avatar-button");
+const avatarForm = avatarModal.querySelector(".modal__form");
+//const avatarCloseButton = avatarModal.querySelector(".modal__button-close");
+const avatarButtonSubmit = avatarModal.querySelector(".modal__button-submit");
+const avatarInput = avatarForm.querySelector("#avatar-input");
+
+// Delete form elements
+const deleteModal = document.querySelector("#delete-modal");
 
 // General form functions
 function openModal(modal) {
@@ -113,6 +128,22 @@ function handleEscape(evt) {
     }
   }
 }
+// edit avatar functions
+function handleAvatarSubmit(evt) {
+  evt.preventDefault();
+  api
+    .editAvatarInfo(avatarInput.value)
+    .then((data) => {
+      avatarInput.textContent = data.avatar;
+      closeModal(avatarModal);
+    })
+    .catch(console.error);
+}
+
+avatarButton.addEventListener("click", () => {
+  openModal(avatarModal);
+});
+avatarForm.addEventListener("submit", handleAvatarSubmit);
 
 // Find all close buttons
 const closeButtons = document.querySelectorAll(".modal__button-close");
@@ -132,9 +163,17 @@ modals.forEach((modal) => {
 // Edit profile functions
 function handleProfileEditFormSubmit(evt) {
   evt.preventDefault();
-  profileName.textContent = profileNameInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  closeModal(profileEditModal);
+  api
+    .editUserInfo({
+      name: profileNameInput.value,
+      about: profileDescriptionInput.value,
+    })
+    .then((data) => {
+      profileName.textContent = data.name;
+      profileDescription.textContent = data.about;
+      closeModal(profileEditModal);
+    })
+    .catch(console.error);
 }
 profileEditButton.addEventListener("click", () => {
   profileNameInput.value = profileName.textContent;
@@ -169,7 +208,8 @@ function getCardElement(data) {
   });
 
   cardDeleteButton.addEventListener("click", () => {
-    cardElement.remove();
+    //cardElement.remove();
+    openModal(deleteModal);
   });
 
   cardImageElement.addEventListener("click", () => {
