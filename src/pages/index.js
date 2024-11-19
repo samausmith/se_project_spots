@@ -206,11 +206,18 @@ function getCardElement(data) {
   cardImageElement.src = data.link;
   cardImageElement.alt = data.name;
 
-  cardLikeButton.addEventListener("click", () => {
-    cardLikeButton.classList.toggle("card__like-button_liked");
+  cardLikeButton.addEventListener("click", (evt) => {
+    const isLiked = evt.target.classList.contains("card__like-button_liked");
+    api
+      .changeLikeStatus(data._id, isLiked)
+      .then((data) => {
+        cardLikeButton.classList.toggle("card__like-button_liked");
+      })
+      .catch(console.error);
+    //have like button status remain unaffected by refresh
   });
 
-  cardDeleteButton.addEventListener("click", (evt) => {
+  cardDeleteButton.addEventListener("click", () => {
     //cardElement.remove();
     selectedCard = cardElement;
     selectedCardId = data._id;
@@ -233,14 +240,14 @@ function handleDeleteSubmit(evt) {
   api
     .deleteCard(selectedCardId)
     .then((data) => {
-      console.log(data);
       closeModal(deleteModal);
       selectedCard.remove();
     })
     .catch(console.error);
 }
-deleteForm.addEventListener("submit", handleDeleteSubmit);
 
+deleteForm.addEventListener("submit", handleDeleteSubmit);
+//add cancel event listener
 // New/add card functions
 addCardButton.addEventListener("click", () => {
   openModal(addCardModal);
@@ -254,9 +261,9 @@ function handleAddCardFormSubmit(evt) {
     .then((data) => {
       const cardElement = getCardElement(data);
       cardsList.prepend(cardElement);
+      closeModal(addCardModal);
       addCardForm.reset();
       disableButton(addCardButtonSubmit, settings);
-      closeModal(addCardModal);
     })
     .catch(console.error);
 }
