@@ -206,6 +206,11 @@ function getCardElement(data) {
   cardImageElement.src = data.link;
   cardImageElement.alt = data.name;
 
+  //maintains active status to like after refresh
+  if (data.isLiked) {
+    cardLikeButton.classList.add("card__like-button--active");
+  }
+
   cardLikeButton.addEventListener("click", (evt) => {
     const isLiked = evt.target.classList.contains("card__like-button_liked");
     api
@@ -214,7 +219,6 @@ function getCardElement(data) {
         cardLikeButton.classList.toggle("card__like-button_liked");
       })
       .catch(console.error);
-    //have like button status remain unaffected by refresh
   });
 
   cardDeleteButton.addEventListener("click", () => {
