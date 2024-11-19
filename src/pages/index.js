@@ -106,8 +106,11 @@ const avatarForm = avatarModal.querySelector(".modal__form");
 const avatarButtonSubmit = avatarModal.querySelector(".modal__button-submit");
 const avatarInput = avatarForm.querySelector("#avatar-input");
 
-// Delete form elements
+// Delete form elements and consts
 const deleteModal = document.querySelector("#delete-modal");
+const deleteForm = deleteModal.querySelector(".modal__form");
+let selectedCard;
+let selectedCardId;
 
 // General form functions
 function openModal(modal) {
@@ -207,8 +210,10 @@ function getCardElement(data) {
     cardLikeButton.classList.toggle("card__like-button_liked");
   });
 
-  cardDeleteButton.addEventListener("click", () => {
+  cardDeleteButton.addEventListener("click", (evt) => {
     //cardElement.remove();
+    selectedCard = cardElement;
+    selectedCardId = data._id;
     openModal(deleteModal);
   });
 
@@ -222,6 +227,20 @@ function getCardElement(data) {
   return cardElement;
 }
 
+//handle delete form request listener
+function handleDeleteSubmit(evt) {
+  evt.preventDefault();
+  api
+    .deleteCard(selectedCardId)
+    .then((data) => {
+      console.log(data);
+      closeModal(deleteModal);
+      selectedCard.remove();
+    })
+    .catch(console.error);
+}
+deleteForm.addEventListener("submit", handleDeleteSubmit);
+
 // New/add card functions
 addCardButton.addEventListener("click", () => {
   openModal(addCardModal);
@@ -229,12 +248,17 @@ addCardButton.addEventListener("click", () => {
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
-  const newCard = { name: cardCaptionInput.value, link: cardLinkInput.value };
-  const cardElement = getCardElement(newCard);
-  cardsList.prepend(cardElement);
-  addCardForm.reset();
-  disableButton(addCardButtonSubmit, settings);
-  closeModal(addCardModal);
+  //const newCard = { name: cardCaptionInput.value, link: cardLinkInput.value };
+  api
+    .addCardInfo({ name: cardCaptionInput.value, link: cardLinkInput.value })
+    .then((data) => {
+      const cardElement = getCardElement(data);
+      cardsList.prepend(cardElement);
+      addCardForm.reset();
+      disableButton(addCardButtonSubmit, settings);
+      closeModal(addCardModal);
+    })
+    .catch(console.error);
 }
 
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);

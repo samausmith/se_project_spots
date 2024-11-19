@@ -1,0 +1,25 @@
+.modal__button-submit_delete {
+  background-color: #ff6565;
+  transition: background-color 0.3s ease;
+}
+
+.modal__button-submit_delete:hover {
+  background-color: #ff3333;
+}
+
+.modal__button-submit_cancel {
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.modal__button-submit_cancel:hover {
+  background-color: black;
+}
+
+.modal__button-close_offset {
+}
+
+.modal__title_delete {
+  font-size: 24px;
+  text-align: center;
+}
