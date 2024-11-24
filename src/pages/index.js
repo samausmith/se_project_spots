@@ -50,6 +50,8 @@ const api = new Api({
 api
   .getAppInfo()
   .then(([cards, profileInfo]) => {
+    avatarImageElement.src = profileInfo.avatar;
+    avatarImageElement.alt = profileInfo.name;
     cards.forEach((card) => {
       const cardElement = getCardElement(card);
       cardsList.append(cardElement);
