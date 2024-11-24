@@ -220,10 +220,8 @@ function getCardElement(data) {
   cardImageElement.alt = data.name;
 
   //maintains active status to like after refresh
-  console.log(data.isLiked);
   if (data.isLiked) {
-    console.log("condition met");
-    cardLikeButton.classList.add("card__like-button--active");
+    cardLikeButton.classList.add("card__like-button-liked");
   }
 
   cardLikeButton.addEventListener("click", (evt) => {
