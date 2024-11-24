@@ -31,13 +31,12 @@
   align-items: end;
   justify-content: center;
   visibility: hidden;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 0;
   gap: 8px;
   border-style: none;
   border-radius: 8px;
   cursor: pointer;
-  opacity: 50%;
 }
 
 .profile__avatar-container:hover .profile__avatar-button {
