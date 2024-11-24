@@ -143,6 +143,11 @@
     padding-top: 20px;
   }
 
+  .profile__avatar-container {
+    height: 80px;
+    width: 80px;
+    margin: 0 0 12px;
+  }
   .profile__avatar {
     height: 80px;
     width: 80px;
@@ -151,6 +156,16 @@
 
   .profile__avatar-button {
     visibility: visible;
+    height: 23.34px;
+    width: 23.34px;
+    top: 52px;
+    left: 52px;
+    align-items: center;
+  }
+
+  .profile__pencil-icon-light {
+    position: absolute;
+    margin: 0;
   }
 
   .profile__avatar-button::after {

@@ -221,7 +221,7 @@ function getCardElement(data) {
 
   //maintains active status to like after refresh
   if (data.isLiked) {
-    cardLikeButton.classList.add("card__like-button-liked");
+    cardLikeButton.classList.add("card__like-button_liked");
   }
 
   cardLikeButton.addEventListener("click", (evt) => {
