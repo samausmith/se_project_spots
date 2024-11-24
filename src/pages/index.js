@@ -52,12 +52,12 @@ api
   .then(([cards, profileInfo]) => {
     avatarImageElement.src = profileInfo.avatar;
     avatarImageElement.alt = profileInfo.name;
+    profileName.textContent = profileInfo.name;
+    profileDescription.textContent = profileInfo.about;
     cards.forEach((card) => {
       const cardElement = getCardElement(card);
       cardsList.append(cardElement);
     });
-    profileName.textContent = profileInfo.name;
-    profileDescription.textContent = profileInfo.about;
   })
   .catch(console.error);
 
@@ -143,7 +143,7 @@ function handleEscape(evt) {
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
   const saveButton = evt.submitter;
-  setButtonText(saveButton, true, saveButton.textContent, "Saving...");
+  setButtonText(saveButton, true, "Save", "Saving...");
   api
     .editAvatarInfo(avatarInput.value)
     .then((data) => {
@@ -152,7 +152,7 @@ function handleAvatarSubmit(evt) {
     })
     .catch(console.error)
     .finally(() => {
-      setButtonText(saveButton, false, saveButton.textContent, "Saving...");
+      setButtonText(saveButton, false, "Save", "Saving...");
     });
 }
 
@@ -183,7 +183,7 @@ modals.forEach((modal) => {
 function handleProfileEditFormSubmit(evt) {
   evt.preventDefault();
   const saveButton = evt.submitter;
-  setButtonText(saveButton, true, saveButton.textContent, "Saving...");
+  setButtonText(saveButton, true, "Save", "Saving...");
   api
     .editUserInfo({
       name: profileNameInput.value,
@@ -196,7 +196,7 @@ function handleProfileEditFormSubmit(evt) {
     })
     .catch(console.error)
     .finally(() => {
-      setButtonText(saveButton, false, saveButton.textContent, "Saving...");
+      setButtonText(saveButton, false, "Save", "Saving...");
     });
 }
 profileEditButton.addEventListener("click", () => {
@@ -263,7 +263,7 @@ function getCardElement(data) {
 function handleDeleteSubmit(evt) {
   evt.preventDefault();
   const deleteButton = evt.submitter;
-  setButtonText(deleteButton, true, deleteButton.textContent, "Deleting...");
+  setButtonText(deleteButton, true, "Delete", "Deleting...");
   api
     .deleteCard(selectedCardId)
     .then((data) => {
@@ -272,12 +272,7 @@ function handleDeleteSubmit(evt) {
     })
     .catch(console.error)
     .finally(() => {
-      setButtonText(
-        deleteButton,
-        false,
-        deleteButton.textContent,
-        "Deleting..."
-      );
+      setButtonText(deleteButton, false, "Delete", "Deleting...");
     });
 }
 
@@ -292,7 +287,7 @@ function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
   //const newCard = { name: cardCaptionInput.value, link: cardLinkInput.value };
   const saveButton = evt.submitter;
-  setButtonText(saveButton, true, saveButton.textContent, "Saving...");
+  setButtonText(saveButton, true, "Save", "Saving...");
   api
     .addCardInfo({ name: cardCaptionInput.value, link: cardLinkInput.value })
     .then((data) => {
@@ -304,7 +299,7 @@ function handleAddCardFormSubmit(evt) {
     })
     .catch(console.error)
     .finally(() => {
-      setButtonText(saveButton, false, saveButton.textContent, "Saving...");
+      setButtonText(saveButton, false, "Save", "Saving...");
     });
 }
 
