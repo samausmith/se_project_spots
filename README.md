@@ -28,7 +28,3 @@ Spots is a basic interactive social media app that allows the user to do to the 
 ### Deployment
 
 - [Spots](https://samausmith.github.io/se_project_spots/)
-
-#### Video
-
-- [Video Link](https://youtu.be/Vl0JXzAPAhQ)
